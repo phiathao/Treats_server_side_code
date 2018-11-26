@@ -4,11 +4,10 @@ const pool = require('../modules/pool');
 
 // GET /treats
 router.get('/', (req, res)=>{
-    console.log (req.query.q)
     let qString = `SELECT * FROM treats ORDER BY id ASC;`;
-    if (req.query.q != undefined){
-        qString = `SELECT * FROM treats WHERE name ILIKE $1;`;
-        pool.query(qString, [`%${req.query.q}%`]).then((result) => {
+    if (req.query.q != undefined){ // search button also use same get method
+        qString = `SELECT * FROM treats WHERE name ILIKE $1;`; // reassign if there is a search/query.q request
+        pool.query(qString, [`%${req.query.q}%`]).then((result) => { // %search% anything before or after /chocolate donut/ big donut ball
             res.send(result.rows);
         }).catch((err) => {
             console.log(err);
@@ -23,8 +22,6 @@ router.get('/', (req, res)=>{
         });
     }
 });
-
-// get query
 
 // POST /treats
 router.post('/', (req, res)=>{
