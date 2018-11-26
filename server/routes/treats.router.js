@@ -4,14 +4,28 @@ const pool = require('../modules/pool');
 
 // GET /treats
 router.get('/', (req, res)=>{
+    console.log (req.query.q)
     let qString = `SELECT * FROM treats ORDER BY id ASC;`;
-    pool.query(qString).then((result) => {
-        res.send(result.rows);
-    }).catch((err) => {
-        console.log(err);
-        res.sendStatus(500);
-    });
+    if (req.query.q != undefined){
+        qString = `SELECT * FROM treats WHERE name ILIKE $1;`;
+        pool.query(qString, [`%${req.query.q}%`]).then((result) => {
+            res.send(result.rows);
+        }).catch((err) => {
+            console.log(err);
+            res.sendStatus(500);
+        });
+    } else {
+        pool.query(qString).then((result) => {
+            res.send(result.rows);
+        }).catch((err) => {
+            console.log(err);
+            res.sendStatus(500);
+        });
+    }
 });
+
+// get query
+
 // POST /treats
 router.post('/', (req, res)=>{
     let qString = `INSERT INTO treats ( name, description, pic) VALUES ( $1, $2, $3);`;
