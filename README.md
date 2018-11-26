@@ -61,13 +61,13 @@ Create the routes and SQL queries necessary to respond to the requests from the 
 
 You will need:
 
-- [ ] `GET /treats` should return all treats from the database.
+- [x] `GET /treats` should return all treats from the database.
 
-- [ ] `DELETE /treats/<id>` Deletes a specific treat. Note that the Mode Toggle button in the interface will display the delete button for each treat.
+- [x] `DELETE /treats/<id>` Deletes a specific treat. Note that the Mode Toggle button in the interface will display the delete button for each treat.
 
-- [ ] `POST /treats` expects a treat name, description and link to a url image. There are images provided in `/server/public/assets`
+- [x] `POST /treats` expects a treat name, description and link to a url image. There are images provided in `/server/public/assets`
 
-- [ ] `PUT /treats/<id>` updates the treat description (the edit button is also displayed with the Mode Toggle button).
+- [x] `PUT /treats/<id>` updates the treat description (the edit button is also displayed with the Mode Toggle button).
 
 
 Once working you should be able to enter new treat info as such:
@@ -94,7 +94,7 @@ And the new info should be in your table:
 
 **If you're feeling fancy and have some time to spare**, try this one. You might need to research query strings and express. 
 
-- [ ] `GET /treats?q=donut` should return only treats that match the query parameter.
+- [x] `GET /treats?q=donut` should return only treats that match the query parameter.
 
 ---
 
