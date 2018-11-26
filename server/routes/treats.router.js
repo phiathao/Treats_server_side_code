@@ -14,6 +14,13 @@ router.get('/', (req, res)=>{
 });
 // POST /treats
 router.post('/', (req, res)=>{
+    let qString = `INSERT INTO treats ( name, description, pic) VALUES ( $1, $2, $3);`;
+    pool.query(qString, [req.body.name, req.body.description, req.body.pic]).then((result) => {
+        res.sendStatus(201);
+    }).catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+    });
 });
 
 // PUT /treats/<id>
@@ -28,6 +35,13 @@ router.put('/:id', (req, res)=>{
     });
 });
 // DELETE /treats/<id>
-router.delete('/', (req, res)=>{
+router.delete('/:id', (req, res)=>{
+    let qString = `DELETE FROM treats WHERE id = $1;`;
+    pool.query(qString, [req.params.id]).then((result) => {
+        res.sendStatus(200);
+    }).catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+    });
 });
 module.exports = router;
